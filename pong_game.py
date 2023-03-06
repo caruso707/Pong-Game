@@ -17,7 +17,7 @@ class PongGame:
         self.screen.setup(self.screen_x, self.screen_y)
         self.screen.bgcolor("black")
         self.screen.title("Pong Game")
-        self.time_per_move = 25  # ms
+        self.time_per_move = 20  # ms
         self.screen.tracer(0)
 
         # Setup paddles
@@ -72,10 +72,10 @@ class PongGame:
             if debounce_cycles > 0:
                 debounce_cycles -= 1
 
-            if self.paddle1.ball_in_contact(ball=self.ball.ball, threshold=25) and debounce_cycles == 0:
+            if self.paddle1.ball_in_contact(ball=self.ball, threshold=10) and debounce_cycles == 0:
                 self.ball.paddle_heading()
                 debounce_cycles = 10
-            elif self.paddle2.ball_in_contact(ball=self.ball.ball, threshold=25) and debounce_cycles == 0:
+            elif self.paddle2.ball_in_contact(ball=self.ball, threshold=10) and debounce_cycles == 0:
                 self.ball.paddle_heading()
                 debounce_cycles = 10
 
