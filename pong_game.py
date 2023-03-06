@@ -61,14 +61,17 @@ class PongGame:
                          min_y=self.screen_y / -2,
                          max_y=self.screen_y / 2)
 
+        self.screen.update()
+
     def play_game(self, max_score=3):
         """Initiates pong game until max score is reached."""
         game_active = True
         debounce_cycles = 0
+        time.sleep(1)
 
         while game_active:
             self.screen.update()
-            self.ball.move_ball(num_steps=8, step=1)
+            self.ball.move_ball(num_steps=7, step=1)
             if debounce_cycles > 0:
                 debounce_cycles -= 1
 
@@ -79,16 +82,20 @@ class PongGame:
                 self.ball.paddle_heading()
                 debounce_cycles = 10
 
-            if self.ball.check_wall_contact(threshold=10) == 1:
+            if self.ball.check_wall_contact(threshold=8) == 1:
                 self.score1.increment_score()
                 self.ball.reset_ball()
+                self.paddle1.reset_paddle()
+                self.paddle2.reset_paddle()
                 self.screen.update()
-                time.sleep(3)
-            elif self.ball.check_wall_contact(threshold=10) == 2:
+                time.sleep(1)
+            elif self.ball.check_wall_contact(threshold=8) == 2:
                 self.score2.increment_score()
                 self.ball.reset_ball()
+                self.paddle1.reset_paddle()
+                self.paddle2.reset_paddle()
                 self.screen.update()
-                time.sleep(3)
+                time.sleep(1)
 
             if self.score1.score >= max_score or self.score2.score >= max_score:
                 game_active = 0
